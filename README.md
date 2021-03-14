@@ -5,11 +5,12 @@ Demonstration of AWS Batch infrastructure for processing CSV files from S3 to by
 AWS Batch is a container-based solution that alleviates some of these concerns. EC2 spot can be used to lower the cost of the solution.
 
 ## Infrastructure
+
 * *AWS CodeCommit repository* for the code repository
 * *AWS EC2 Container Registry* Docker image registry
 * *AWS CodeBuild* will build the Docker image and push to the ECR repository
 * *AWS Batch Compute Cluster* will use a spot fleet at 25% of the on-demand price
-* *AWS Batch Job* will run a python script to process the CSV in a streaming fashion 
+* *AWS Batch Job* will run a python script to process the CSV in a streaming fashion
 
 Terraform is used to describe the infrastructure.
 
@@ -17,7 +18,7 @@ Terraform is used to describe the infrastructure.
 
 * Create a file for the terraform variables (deploy/terraform.tfvars)
 
-```
+```bash
 region = "us-east-1"
 vpc_id = "vpc-XXXXXXX"
 security_group_ids = [
@@ -65,7 +66,6 @@ The code is located in `aws_batch_csv_processor/__main__.py`. Most of the code i
 the CSV file from S3 by streaming the contents.
 
 The parameters to the batch job are the S3 bucket and key for the file:
+
 * _bucket_ is the S3 bucket parameter
 * _path_ is the path to the S3 object to read
-
-By default, the job will read the [IRS 990 public dataset](https://aws.amazon.com/public-datasets/irs-990/) for 2017.
