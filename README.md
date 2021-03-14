@@ -62,8 +62,8 @@ aws batch submit-job --job-name "first_run" --job-queue "batch_job_queue" --job-
 The CSV processor in the repository is quite simple (it just counts the columns and rows). But you
 can customize the script to do whatever you need to with the CSV.
 
-The code is located in `aws_batch_csv_processor/__main__.py`. Most of the code is dedicated to reading
-the CSV file from S3 by streaming the contents.
+The code is located in `terraform_aws_batch_csv_processor/__main__.py`. Most of the code is dedicated to reading the CSV file from S3 by streaming the contents. You can modify the program 
+to process the input data further for your needs.
 
 The parameters to the batch job are the S3 bucket and key for the file:
 
