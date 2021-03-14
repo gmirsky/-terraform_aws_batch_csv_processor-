@@ -70,5 +70,7 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+terraform.lock.hcl
+
 notes.txt
 .DS_Store
