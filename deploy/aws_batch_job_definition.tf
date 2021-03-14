@@ -5,8 +5,8 @@ resource "aws_batch_job_definition" "csv_processor" {
     attempts = 5
   }
   parameters = {
-    "bucket" = "irs-form-990"   # bucket name
-    "path"   = "index_2017.csv" # objectname
+    "bucket" = var.bucket_name 
+    "path"   = var.object_path_and_name
   }
   container_properties = <<EOF
 {
