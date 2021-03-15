@@ -1,19 +1,19 @@
 variable "region" {
-  type        = string
-  description = "AWS Region to deploy into"
   default     = "us-east-1"
+  description = "AWS Region to deploy into"
+  type        = string
 }
 
 variable "image_tag" {
-  type        = string
-  description = "Container image tag"
   default     = "latest"
+  description = "Container image tag"
+  type        = string
 }
 
 variable "image_name" {
-  type        = string
-  description = "Image name for the container"
   default     = "csv_processor"
+  description = "Image name for the container"
+  type        = string
 }
 
 variable "vpc_id" {
@@ -27,22 +27,29 @@ variable "security_group_ids" {
 }
 
 variable "bucket_name" {
-  type        = string
   description = "S3 bucket name containing data files"
+  type        = string
 }
 
 variable "object_path_and_name" {
-  type        = string
   description = "S3 object path and name"
+  type        = string
 }
 
 variable "tags" {
+  default     = {}
   description = "A list of tag blocks. Each element should have keys named key, value, etc."
   type        = map(string)
-  default     = {}
 }
 
 variable "environment" {
-  description = "Environment for service"
   default     = "DEV"
+  description = "Environment for service"
+  type        = string
+}
+
+variable "bid_percentage" {
+  default     = 25
+  description = "Integer of minimum percentage that a Spot Instance price must be compared with the On-Demand price for that instance type before instances are launched."
+  type        = number
 }
