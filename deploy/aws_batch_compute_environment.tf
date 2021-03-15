@@ -4,8 +4,7 @@ resource "aws_batch_compute_environment" "compute" {
     instance_role = aws_iam_instance_profile.ecs_instance_role.arn
     instance_type = [
       "m4",
-      "m5",
-      "m6g"
+      "m5"
     ]
     max_vcpus           = 16
     min_vcpus           = 0
