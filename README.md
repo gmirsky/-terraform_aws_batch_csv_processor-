@@ -26,6 +26,11 @@
   ]
   bucket_name          = "my-s3-bucket-name-goes-here"
   object_path_and_name = "path/in/bucket/to/object.csv"
+  environment          = "DEV"
+  tags = {
+    cost-center = "00-000-0000-1"
+    project     = "AWS Batch Sample"
+  }
   ```
 
   * Use Terraform to setup the infrastructure
