@@ -35,3 +35,14 @@ variable "object_path_and_name" {
   type        = string
   description = "S3 object path and name"
 }
+
+variable "tags" {
+  description = "A list of tag blocks. Each element should have keys named key, value, etc."
+  type        = map(string)
+  default     = {}
+}
+
+variable "environment" {
+  description = "Environment for service"
+  default     = "DEV"
+}
