@@ -27,10 +27,6 @@ resource "aws_codebuild_project" "build" {
       name  = "IMAGE_TAG"
       value = var.image_tag
     }
-    environment_variable {
-      name  = "IMAGE_REPOSITORY_URL"
-      value = aws_ecr_repository.docker_repo.repository_url
-    }
   }
   source {
     type     = "CODECOMMIT"
