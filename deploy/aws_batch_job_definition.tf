@@ -5,7 +5,7 @@ resource "aws_batch_job_definition" "csv_processor" {
     attempts = 5
   }
   parameters = {
-    "bucket" = var.bucket_name 
+    "bucket" = var.bucket_name
     "path"   = var.object_path_and_name
   }
   container_properties = <<EOF
