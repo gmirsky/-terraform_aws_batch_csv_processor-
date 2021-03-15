@@ -14,6 +14,7 @@ resource "aws_iam_role" "task_role" {
     ]
 }
 EOF
+  tags               = module.aws_user_tags.tags
 }
 
 resource "aws_iam_role" "spot_fleet_role" {
@@ -32,6 +33,7 @@ resource "aws_iam_role" "spot_fleet_role" {
     ]
 }
 EOF
+  tags               = module.aws_user_tags.tags
 }
 
 resource "aws_iam_role" "aws_batch_service_role" {
@@ -50,6 +52,7 @@ resource "aws_iam_role" "aws_batch_service_role" {
     ]
 }
 EOF
+  tags               = module.aws_user_tags.tags
 }
 
 resource "aws_iam_role" "ecs_instance_role" {
@@ -68,6 +71,7 @@ resource "aws_iam_role" "ecs_instance_role" {
     ]
 }
 EOF
+  tags               = module.aws_user_tags.tags
 }
 
 resource "aws_iam_role" "codebuild_role" {
@@ -86,4 +90,5 @@ resource "aws_iam_role" "codebuild_role" {
   ]
 }
 EOF
+  tags               = module.aws_user_tags.tags
 }

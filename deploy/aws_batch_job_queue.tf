@@ -8,4 +8,5 @@ resource "aws_batch_job_queue" "job_queue" {
   depends_on = [
     aws_batch_compute_environment.compute
   ]
+  tags = module.aws_user_tags.tags
 }

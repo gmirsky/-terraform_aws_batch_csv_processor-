@@ -24,4 +24,5 @@ resource "aws_batch_job_definition" "csv_processor" {
     "jobRoleArn": "${aws_iam_role.task_role.arn}"
 }
 EOF
+  tags                 = module.aws_user_tags.tags
 }
