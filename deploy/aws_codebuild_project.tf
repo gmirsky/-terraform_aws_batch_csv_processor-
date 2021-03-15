@@ -27,6 +27,14 @@ resource "aws_codebuild_project" "build" {
       name  = "IMAGE_TAG"
       value = var.image_tag
     }
+    environment_variable {
+      name  = "AWS_DEFAULT_REGION"
+      value = var.region
+    }
+    environment_variable {
+      name  = "AWS_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    }
   }
   source {
     type     = "CODECOMMIT"
