@@ -61,8 +61,8 @@
   Push the code to your newly created CodeCommit repository
 
   ```bash
-  git remote add codecommit <SSH_URL>
-  git push codecommit master
+  git remote set-url --add --push origin <SSH_URL>
+  git push
   ```
 
   Submit a build
@@ -77,7 +77,7 @@
   aws batch submit-job --job-name "first_run" --job-queue "batch_job_queue" --job-definition batch_csv_processor:1
   ```
 
-  Once the job is complete, it may take up to 15 minutes for the logs will show up in CloudWatch logs depending upon activity in your region.
+  Once the job is complete, it may take up to 15 minutes for the logs will show up depending upon activity in your region, you can view them in CloudWatch logs.
 
   ## Customization
 
