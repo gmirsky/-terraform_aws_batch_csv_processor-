@@ -11,7 +11,7 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_role" {
 
 resource "aws_iam_role_policy_attachment" "spot_fleet_policy" {
   role       = aws_iam_role.spot_fleet_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetRole"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole"
 }
 
 resource "aws_iam_role_policy_attachment" "aws_batch_service_role" {
