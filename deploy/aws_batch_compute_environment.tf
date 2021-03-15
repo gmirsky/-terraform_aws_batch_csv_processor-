@@ -9,9 +9,7 @@ resource "aws_batch_compute_environment" "compute" {
     max_vcpus          = 16
     min_vcpus          = 0
     security_group_ids = var.security_group_ids
-    subnets = [
-      data.aws_subnet_ids.subnets.ids
-    ]
+    subnets = data.aws_subnet_ids.subnets.ids
     type                = "SPOT"
     bid_percentage      = 25
     spot_iam_fleet_role = aws_iam_role.spot_fleet_role.arn
