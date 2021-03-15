@@ -16,25 +16,25 @@
 
   ## Setup
 
-  * Create a spot fleet role for your account if one does not exist.
-
-    ```bash
-    aws iam create-role --role-name AmazonEC2SpotFleetRole \
-        --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Sid":"","Effect":"Allow","Principal":{"Service":"spotfleet.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
-    ```
-  
-    Then attach the `AmazonEC2SpotFleetTaggingRole` managed IAM policy to your `AmazonEC2SpotFleetRole` role
-  
-    ```bash
-    aws iam attach-role-policy \
-        --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole \
-        --role-name AmazonEC2SpotFleetRole
-    ```
-  
-  * Create a file for the terraform variables (deploy/terraform.tfvars)
+  Create a spot fleet role for your account if one does not exist.
 
   ```bash
-region = "us-east-1"
+  aws iam create-role --role-name AmazonEC2SpotFleetRole \
+      --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Sid":"","Effect":"Allow","Principal":{"Service":"spotfleet.amazonaws.com"},"Action":"sts:AssumeRole"}]}'
+  ```
+
+  Then attach the `AmazonEC2SpotFleetTaggingRole` managed IAM policy to your `AmazonEC2SpotFleetRole` role
+
+  ```bash
+  aws iam attach-role-policy \
+      --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole \
+      --role-name AmazonEC2SpotFleetRole
+  ```
+
+  Create a file for the terraform variables (deploy/terraform.tfvars)
+
+  ```bash
+  region = "us-east-1"
   vpc_id = "vpc-57b7xxxx"
   security_group_ids = [
     "sg-5e55xxxx"
@@ -42,54 +42,54 @@ region = "us-east-1"
   bucket_name          = "my-s3-bucket-name-goes-here"
   object_path_and_name = "path/in/bucket/to/object.csv"
   environment          = "DEV"
-tags = {
+  tags = {
     cost-center = "00-000-0000-1"
-  project     = "AWS Batch Sample"
+    project     = "AWS Batch Sample"
   }
   ```
-  
-  * Use Terraform to setup the infrastructure
+
+  Use Terraform to setup the infrastructure
 
   ```bash
-cd deploy
+  cd deploy
   terrform init
   terraform validate
   terraform plan -out=tfplan
-terraform apply tfplan
+  terraform apply tfplan
   ```
 
-  * Push the code to your newly created CodeCommit repository
-  
+  Push the code to your newly created CodeCommit repository
+
   ```bash
-git remote add codecommit <SSH_URL>
+  git remote add codecommit <SSH_URL>
   git push codecommit master
-```
-  
-* Submit a build
-  
-  ```bash
-aws codebuild start-build --project-name aws_batch_csv_processor
   ```
-  
-* Once the build completes, a Batch job can be submitted
-  
-```bash
+
+  Submit a build
+
+  ```bash
+  aws codebuild start-build --project-name aws_batch_csv_processor
+  ```
+
+  Once the build completes, a Batch job can be submitted
+
+  ```bash
   aws batch submit-job --job-name "first_run" --job-queue "batch_job_queue" --job-definition batch_csv_processor:1
   ```
 
-  * Once the job is complete, it may take up to 15 minutes for the logs will show up in CloudWatch logs depending upon activity in your region.
-  
+  Once the job is complete, it may take up to 15 minutes for the logs will show up in CloudWatch logs depending upon activity in your region.
+
   ## Customization
-  
+
   The CSV processor in the repository is quite simple (it just counts the columns and rows). But you
   can customize the script to do whatever you need to with the CSV.
-  
+
   The code is located in `aws_batch_csv_processor/__main__.py`. Most of the code is dedicated to reading
   the CSV file from S3 by streaming the contents.
-  
+
   The parameters to the batch job are the S3 bucket and key for the file:
-  
+
   * _bucket_ is the S3 bucket parameter
   * _path_ is the path to the S3 object to read
-  
+
   
