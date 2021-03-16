@@ -49,7 +49,16 @@ variable "environment" {
 }
 
 variable "bid_percentage" {
-  default     = 25
+  default     = 75
   description = "Integer of minimum percentage that a Spot Instance price must be compared with the On-Demand price for that instance type before instances are launched."
   type        = number
+}
+
+variable "instance_type" {
+  type        = list(string)
+  description = "Batch Compute Environment instance types"
+  default = [
+    "m4",
+    "m5"
+  ]
 }

@@ -1,11 +1,8 @@
 resource "aws_batch_compute_environment" "compute" {
-  compute_environment_name = "spot_m_class"
+  compute_environment_name = "spot_mx_class_${data.aws_caller_identity.current.account_id}"
   compute_resources {
-    instance_role = aws_iam_instance_profile.ecs_instance_role.arn
-    instance_type = [
-      "m4",
-      "m5"
-    ]
+    instance_role       = aws_iam_instance_profile.ecs_instance_role.arn
+    instance_type       = var.instance_type
     max_vcpus           = 16
     min_vcpus           = 0
     security_group_ids  = var.security_group_ids

@@ -1,5 +1,5 @@
 resource "aws_batch_job_definition" "csv_processor" {
-  name = "batch_csv_processor"
+  name = "batch_csv_processor_${data.aws_caller_identity.current.account_id}"
   type = "container"
   retry_strategy {
     attempts = 5
